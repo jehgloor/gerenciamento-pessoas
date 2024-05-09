@@ -1,0 +1,1 @@
+INSERT INTO PESSOA(ID, NOME_COMPLETO) VALUES (1, 'Marcela de Albuquerque');
