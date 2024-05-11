@@ -2,9 +2,12 @@ package br.com.pessoas.modules.pessoa.service;
 
 import br.com.pessoas.modules.comum.exception.NotFoundException;
 import br.com.pessoas.modules.pessoa.dto.PessoaRequest;
+import br.com.pessoas.modules.pessoa.dto.PessoaResponse;
 import br.com.pessoas.modules.pessoa.model.Pessoa;
 import br.com.pessoas.modules.pessoa.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +18,12 @@ public class PessoaService {
     @Autowired
     PessoaRepository repository;
 
-    public Pessoa buscarPorId(Integer id){
-        return buscaPessoaPorId(id);
+    public PessoaResponse buscarPorId(Integer id){
+        return PessoaResponse.of(buscaPessoaPorId(id));
     }
 
-    public Pessoa salvar(PessoaRequest request) {
-
-        return repository.save(Pessoa.of(request));
+    public PessoaResponse salvar(PessoaRequest request) {
+        return PessoaResponse.of(repository.save(Pessoa.of(request)));
     }
 
     public List<Pessoa> buscarTodos() {
