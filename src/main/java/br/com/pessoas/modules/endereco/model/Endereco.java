@@ -37,8 +37,8 @@ public class Endereco {
     @Column(name = "UF")
     private String uf;
 
-
     @Column(name = "SITUACAO")
+    @Enumerated(EnumType.STRING)
     private ESituacao situacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
