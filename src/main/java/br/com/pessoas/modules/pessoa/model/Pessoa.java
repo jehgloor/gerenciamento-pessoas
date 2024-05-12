@@ -1,23 +1,22 @@
 package br.com.pessoas.modules.pessoa.model;
 
-import br.com.pessoas.modules.endereco.dto.EnderecoRequest;
 import br.com.pessoas.modules.endereco.model.Endereco;
-
 import br.com.pessoas.modules.pessoa.dto.PessoaRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
-import javax.persistence.*;
+
 @Data
+@Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "PESSOA")
-@Entity
-@Builder
 public class Pessoa {
 
     @Id

@@ -29,7 +29,7 @@ public class EnderecoService {
     public EnderecoResponse salvarEndereco(EnderecoRequest request) {
 
         var pessoa = pessoaService.buscaPessoaPorId(request.getPessoaId());
-        if(request.getSituacao() == ESituacao.PRIMARIA) {
+        if (request.getSituacao() == ESituacao.PRIMARIA) {
             repository.atualizaEnderecoParaSecundario(request.getPessoaId());
         }
         return EnderecoResponse.of(repository.save(Endereco.of(request, pessoa)));

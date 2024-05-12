@@ -2,20 +2,18 @@ package br.com.pessoas.modules.endereco.model;
 
 import br.com.pessoas.modules.endereco.dto.EnderecoRequest;
 import br.com.pessoas.modules.endereco.enums.ESituacao;
-
 import br.com.pessoas.modules.pessoa.model.Pessoa;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Table(name = "ENDERECO")
-@Entity
 public class Endereco {
     @Id
     @Column(name = "ID")
@@ -44,7 +42,7 @@ public class Endereco {
     @ManyToOne(fetch = FetchType.LAZY)
     private Pessoa pessoa;
 
-    public static Endereco of (EnderecoRequest request, Pessoa pessoa) {
+    public static Endereco of(EnderecoRequest request, Pessoa pessoa) {
 
         var endereco = new Endereco();
         endereco.setCep(request.getCep());

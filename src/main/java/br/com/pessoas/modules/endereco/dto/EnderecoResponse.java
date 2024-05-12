@@ -12,7 +12,6 @@ public class EnderecoResponse {
     private Integer numero;
     private String cidade;
     private String uf;
-//    private Pessoa pessoa;
     private ESituacao situacao;
     private Integer pessoaId;
 

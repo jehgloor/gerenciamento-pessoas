@@ -19,7 +19,7 @@ public class PessoaController {
     PessoaService service;
 
     @GetMapping("/{id}")
-    public PessoaResponse buscaPorId(@PathVariable Integer id){
+    public PessoaResponse buscaPorId(@PathVariable Integer id) {
         return service.buscarPorId(id);
     }
 
@@ -35,7 +35,7 @@ public class PessoaController {
     }
 
     @PutMapping("/id")
-    public Pessoa editar (@PathVariable Integer id, @Validated @RequestBody PessoaRequest request) {
+    public Pessoa editar(@PathVariable Integer id, @Validated @RequestBody PessoaRequest request) {
         return service.editar(id, request);
     }
 }
