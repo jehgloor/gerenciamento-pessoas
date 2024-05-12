@@ -1,7 +1,10 @@
 package br.com.pessoas.modules.endereco.model;
 
+import br.com.pessoas.modules.endereco.dto.EnderecoRequest;
 import br.com.pessoas.modules.endereco.enums.ESituacao;
+
 import br.com.pessoas.modules.pessoa.model.Pessoa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,8 +36,24 @@ public class Endereco {
 
     @Column(name = "UF")
     private String uf;
-//    private Pessoa pessoa;
+
 
     @Column(name = "SITUACAO")
     private ESituacao situacao;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Pessoa pessoa;
+
+    public static Endereco of (EnderecoRequest request, Pessoa pessoa) {
+
+        var endereco = new Endereco();
+        endereco.setCep(request.getCep());
+        endereco.setUf(request.getUf());
+        endereco.setCidade(request.getCidade());
+        endereco.setLogradouro(request.getLogradouro());
+        endereco.setNumero(request.getNumero());
+        endereco.setSituacao(request.getSituacao());
+        endereco.setPessoa(pessoa);
+        return endereco;
+    }
 }

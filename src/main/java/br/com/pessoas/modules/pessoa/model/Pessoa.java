@@ -27,7 +27,9 @@ public class Pessoa {
 
     @Column(name = "DATA_NASCIMENTO")
     private LocalDate dataNascimento;
-//    private List<Endereco> enderecos;
+
+    @OneToMany(mappedBy = "pessoa")
+    private List<Endereco> enderecos;
 
     public static Pessoa of(PessoaRequest request) {
         var pessoa = new Pessoa();

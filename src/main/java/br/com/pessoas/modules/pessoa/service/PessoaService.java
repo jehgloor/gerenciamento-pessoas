@@ -35,7 +35,7 @@ public class PessoaService {
         return repository.save(pessoa.of(request));
     }
 
-    private Pessoa buscaPessoaPorId (Integer id) {
+    public Pessoa buscaPessoaPorId (Integer id) {
         return repository.findById(id).orElseThrow(() ->
                 new NotFoundException("A Pessoa não foi encontrado."));
     }
