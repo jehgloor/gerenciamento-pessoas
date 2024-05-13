@@ -3,7 +3,9 @@ package br.com.pessoas.modules.endereco.model;
 import br.com.pessoas.modules.endereco.dto.EnderecoRequest;
 import br.com.pessoas.modules.endereco.enums.ESituacao;
 import br.com.pessoas.modules.pessoa.model.Pessoa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,10 +13,12 @@ import javax.persistence.*;
 
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "ENDERECO")
 public class Endereco {
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +44,7 @@ public class Endereco {
     private ESituacao situacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Pessoa pessoa;
 
     public static Endereco of(EnderecoRequest request, Pessoa pessoa) {
@@ -53,5 +58,14 @@ public class Endereco {
         endereco.setSituacao(request.getSituacao());
         endereco.setPessoa(pessoa);
         return endereco;
+    }
+
+    public void setAll(EnderecoRequest request) {
+        this.setCep(request.getCep());
+        this.setUf(request.getUf());
+        this.setCidade(request.getCidade());
+        this.setLogradouro(request.getLogradouro());
+        this.setNumero(request.getNumero());
+        this.setSituacao(request.getSituacao());
     }
 }

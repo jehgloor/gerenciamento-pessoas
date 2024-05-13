@@ -2,6 +2,7 @@ package br.com.pessoas.modules.pessoa.model;
 
 import br.com.pessoas.modules.endereco.model.Endereco;
 import br.com.pessoas.modules.pessoa.dto.PessoaRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Pessoa {
     private LocalDate dataNascimento;
 
     @OneToMany(mappedBy = "pessoa")
+    @JsonIgnore
     private List<Endereco> enderecos;
 
     public static Pessoa of(PessoaRequest request) {
@@ -39,5 +41,10 @@ public class Pessoa {
         pessoa.setDataNascimento(request.getDataNascimento());
 
         return pessoa;
+    }
+
+    public void setAll(PessoaRequest request) {
+        this.setNomeCompleto(request.getNomeCompleto());
+        this.setDataNascimento(request.getDataNascimento());
     }
 }
