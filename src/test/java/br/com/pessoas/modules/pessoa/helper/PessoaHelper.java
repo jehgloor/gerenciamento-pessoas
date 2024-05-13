@@ -10,6 +10,7 @@ public class PessoaHelper {
         return Pessoa.builder()
                 .nomeCompleto("Josue da Silva")
                 .dataNascimento(LocalDate.of(2000,03,01))
-                .id(1).build();
+                .id(1)
+                .build();
     }
 }
