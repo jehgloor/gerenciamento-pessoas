@@ -4,6 +4,8 @@ import br.com.pessoas.modules.endereco.enums.ESituacao;
 import br.com.pessoas.modules.endereco.model.Endereco;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class EnderecoResponse {
 
@@ -22,7 +24,12 @@ public class EnderecoResponse {
         response.setNumero(endereco.getNumero());
         response.setCidade(endereco.getCidade());
         response.setUf(endereco.getUf());
+        response.setSituacao(endereco.getSituacao());
         response.setPessoaId(endereco.getPessoa().getId());
         return response;
+    }
+
+    public static List<EnderecoResponse> of(List<Endereco> enderecos) {
+        return enderecos.stream().map(endereco -> EnderecoResponse.of(endereco)).toList();
     }
 }

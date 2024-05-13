@@ -30,7 +30,13 @@ public class EnderecoController {
     }
 
     @GetMapping
-    public List<Endereco> buscarTodos() {
+    public List<EnderecoResponse> buscarTodos() {
         return service.buscarTodos();
     }
+
+    @PutMapping("/{idEndereco}")
+    public EnderecoResponse editarEndereco(@PathVariable Integer idEndereco, @Validated @RequestBody EnderecoRequest request) {
+        return service.editarEndereco(idEndereco, request);
+    }
+
 }

@@ -9,6 +9,7 @@ import br.com.pessoas.modules.endereco.repository.EnderecoRepository;
 import br.com.pessoas.modules.pessoa.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,7 +41,16 @@ public class EnderecoService {
                 new NotFoundException("O Endereço não foi encontrado."));
     }
 
-    public List<Endereco> buscarTodos() {
-        return repository.findAll();
+    public List<EnderecoResponse> buscarTodos() {
+        return EnderecoResponse.of(repository.findAll());
+    }
+
+     @Transactional
+    public EnderecoResponse editarEndereco(Integer id, EnderecoRequest enderecoRequest) {
+        var endereco = buscaEnderecoPorId(id);
+        endereco.setAll(enderecoRequest);
+        repository.save(endereco);
+        return EnderecoResponse.of(endereco);
+
     }
 }
