@@ -24,7 +24,7 @@ public class PessoaController {
     }
 
     @GetMapping
-    public List<Pessoa> buscarTodos() {
+    public List<PessoaResponse> buscarTodos() {
         return service.buscarTodos();
     }
 
@@ -34,7 +34,7 @@ public class PessoaController {
         return service.salvar(request);
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public Pessoa editar(@PathVariable Integer id, @Validated @RequestBody PessoaRequest request) {
         return service.editar(id, request);
     }

@@ -7,6 +7,7 @@ import br.com.pessoas.modules.pessoa.model.Pessoa;
 import br.com.pessoas.modules.pessoa.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,21 +20,21 @@ public class PessoaService {
     public PessoaResponse buscarPorId(Integer id) {
         return PessoaResponse.of(buscaPessoaPorId(id));
     }
-
+    @Transactional
     public PessoaResponse salvar(PessoaRequest request) {
         return PessoaResponse.of(repository.save(Pessoa.of(request)));
     }
 
-    public List<Pessoa> buscarTodos() {
-        return repository.findAll();
+    public List<PessoaResponse> buscarTodos() {
+
+        return PessoaResponse.of(repository.findAll());
     }
 
-
-
-
+    @Transactional
     public Pessoa editar(Integer id, PessoaRequest request) {
         var pessoa = buscaPessoaPorId(id);
-        return repository.save(pessoa.of(request));
+        pessoa.setAll(request);
+        return repository.save(pessoa);
     }
 
     public Pessoa buscaPessoaPorId(Integer id) {

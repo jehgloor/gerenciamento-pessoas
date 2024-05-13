@@ -4,6 +4,7 @@ import br.com.pessoas.modules.pessoa.model.Pessoa;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class PessoaResponse {
@@ -15,6 +16,10 @@ public class PessoaResponse {
         response.setNomeCompleto(pessoa.getNomeCompleto());
         response.setDataNascimento(pessoa.getDataNascimento());
         return response;
+    }
+
+    public static List<PessoaResponse> of(List<Pessoa> pessoas) {
+       return pessoas.stream().map(pessoa -> PessoaResponse.of(pessoa)).toList();
     }
 
 }
