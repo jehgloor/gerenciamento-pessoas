@@ -2,11 +2,12 @@ package br.com.pessoas.modules.endereco.dto;
 
 import br.com.pessoas.modules.endereco.enums.ESituacao;
 import br.com.pessoas.modules.endereco.model.Endereco;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
 
-@Data
+@Builder
 public class EnderecoResponse {
 
     private String logradouro;
@@ -18,15 +19,16 @@ public class EnderecoResponse {
     private Integer pessoaId;
 
     public static EnderecoResponse of(Endereco endereco) {
-        var response = new EnderecoResponse();
-        response.setLogradouro(endereco.getLogradouro());
-        response.setCep(endereco.getCep());
-        response.setNumero(endereco.getNumero());
-        response.setCidade(endereco.getCidade());
-        response.setUf(endereco.getUf());
-        response.setSituacao(endereco.getSituacao());
-        response.setPessoaId(endereco.getPessoa().getId());
-        return response;
+        return EnderecoResponse.builder()
+                .logradouro(endereco.getLogradouro())
+                .cep(endereco.getCep())
+                .numero(endereco.getNumero())
+                .cidade(endereco.getCidade())
+                .uf(endereco.getUf())
+                .situacao(endereco.getSituacao())
+                .pessoaId(endereco.getPessoa().getId())
+                .build();
+
     }
 
     public static List<EnderecoResponse> of(List<Endereco> enderecos) {
