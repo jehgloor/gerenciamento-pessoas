@@ -1,6 +1,7 @@
 package br.com.pessoas.modules.endereco.controller;
 
 import br.com.pessoas.modules.comum.exception.NotFoundException;
+import br.com.pessoas.modules.endereco.enums.ESituacao;
 import br.com.pessoas.modules.endereco.repository.EnderecoRepository;
 import br.com.pessoas.modules.endereco.service.EnderecoService;
 import br.com.pessoas.modules.pessoa.service.PessoaService;
@@ -17,14 +18,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 import static br.com.pessoas.helper.TestsHelper.convertObjectToJsonBytes;
 import static br.com.pessoas.modules.endereco.helper.EnderecoHelper.umEnderecoRequest;
 import static br.com.pessoas.modules.endereco.helper.EnderecoHelper.umEnderecoResponse;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -97,6 +100,30 @@ public class EnderecoControllerTest {
                 .andExpect(jsonPath("$.pessoaId", is(1)));
 
         verify(service).salvarEndereco(request);
+    }
+
+    @Test
+    public void salvarEndereco_deveRetornar400_seCamposObrigatoriosVazio() throws Exception {
+        var request = umEnderecoRequest();
+        var response = umEnderecoResponse();
+        request.setCidade(null);
+        request.setUf(null);
+        request.setPessoaId(null);
+        request.setSituacao(null);
+
+        when(service.salvarEndereco(request)).thenReturn(response);
+
+        mvc.perform(MockMvcRequestBuilders.post(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(convertObjectToJsonBytes(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$[*].message", containsInAnyOrder(
+                        "O campo uf must not be blank",
+                        "O campo cidade must not be blank",
+                        "O campo situacao must not be null",
+                        "O campo pessoaId must not be null")));
+
+        verify(service, never()).salvarEndereco(request);
     }
 
     @Test

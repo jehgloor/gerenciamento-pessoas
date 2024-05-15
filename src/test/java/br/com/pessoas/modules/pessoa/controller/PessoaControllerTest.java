@@ -20,9 +20,9 @@ import java.util.List;
 import static br.com.pessoas.helper.TestsHelper.convertObjectToJsonBytes;
 import static br.com.pessoas.modules.pessoa.helper.PessoaHelper.umaPessoaRequest;
 import static br.com.pessoas.modules.pessoa.helper.PessoaHelper.umaPessoaResponse;
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -82,6 +82,26 @@ public class PessoaControllerTest {
                 .andExpect(jsonPath("$.dataNascimento", is("1990-06-01")));
 
         verify(service).salvar(request);
+    }
+
+    @Test
+    public void salvar_deveRetornar400_seCamposObrigatoriosVazio() throws Exception {
+        var request = umaPessoaRequest();
+        var response = umaPessoaResponse();
+        request.setNomeCompleto(null);
+        request.setDataNascimento(null);
+
+        when(service.salvar(request)).thenReturn(response);
+
+        mvc.perform(MockMvcRequestBuilders.post(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(convertObjectToJsonBytes(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$[*].message", containsInAnyOrder(
+                        "O campo nomeCompleto must not be blank",
+                        "O campo dataNascimento must not be null")));
+
+        verify(service, never()).salvar(request);
     }
 
     @Test
