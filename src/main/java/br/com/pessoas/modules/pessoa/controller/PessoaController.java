@@ -35,7 +35,7 @@ public class PessoaController {
     }
 
     @PutMapping("/{id}")
-    public Pessoa editar(@PathVariable Integer id, @Validated @RequestBody PessoaRequest request) {
+    public PessoaResponse editar(@PathVariable Integer id, @Validated @RequestBody PessoaRequest request) {
         return service.editar(id, request);
     }
 }

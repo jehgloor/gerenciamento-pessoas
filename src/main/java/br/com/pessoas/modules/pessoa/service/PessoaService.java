@@ -20,6 +20,7 @@ public class PessoaService {
     public PessoaResponse buscarPorId(Integer id) {
         return PessoaResponse.of(buscaPessoaPorId(id));
     }
+
     @Transactional
     public PessoaResponse salvar(PessoaRequest request) {
         return PessoaResponse.of(repository.save(Pessoa.of(request)));
@@ -31,10 +32,11 @@ public class PessoaService {
     }
 
     @Transactional
-    public Pessoa editar(Integer id, PessoaRequest request) {
+    public PessoaResponse editar(Integer id, PessoaRequest request) {
         var pessoa = buscaPessoaPorId(id);
         pessoa.setAll(request);
-        return repository.save(pessoa);
+        repository.save(pessoa);
+        return PessoaResponse.of(pessoa);
     }
 
     public Pessoa buscaPessoaPorId(Integer id) {
