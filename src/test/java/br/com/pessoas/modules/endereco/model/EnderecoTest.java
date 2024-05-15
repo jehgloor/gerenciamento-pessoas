@@ -27,7 +27,7 @@ public class EnderecoTest {
 
         var request = umEnderecoRequest();
         request.setLogradouro("Rua Guargulio");
-        endereco.setAll(request);
+        endereco.setAll(request, umaPessoa());
 
         assertThat(endereco)
                 .extracting("logradouro", "cep", "numero", "cidade", "uf", "situacao", "pessoa.id")

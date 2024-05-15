@@ -60,12 +60,13 @@ public class Endereco {
         return endereco;
     }
 
-    public void setAll(EnderecoRequest request) {
+    public void setAll(EnderecoRequest request, Pessoa pessoa) {
         this.setCep(request.getCep());
         this.setUf(request.getUf());
         this.setCidade(request.getCidade());
         this.setLogradouro(request.getLogradouro());
         this.setNumero(request.getNumero());
+        this.setPessoa(pessoa);
         this.setSituacao(request.getSituacao());
     }
 }

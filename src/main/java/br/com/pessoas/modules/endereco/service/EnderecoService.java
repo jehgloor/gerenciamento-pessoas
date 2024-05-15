@@ -48,9 +48,13 @@ public class EnderecoService {
     @Transactional
     public EnderecoResponse editarEndereco(Integer id, EnderecoRequest enderecoRequest) {
         var endereco = buscaEnderecoPorId(id);
-        endereco.setAll(enderecoRequest);
+        var pessoa = pessoaService.buscaPessoaPorId(enderecoRequest.getPessoaId());
+        endereco.setAll(enderecoRequest, pessoa);
+        if (enderecoRequest.getSituacao() == ESituacao.PRIMARIA) {
+            repository.atualizaEnderecoParaSecundario(enderecoRequest.getPessoaId());
+        }
+
         repository.save(endereco);
         return EnderecoResponse.of(endereco);
-
     }
 }

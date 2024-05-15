@@ -127,6 +127,7 @@ public class EnderecoServiceTest {
     @Test
     public void editarEndereco_deveAtualizarEndereco_quandoExistirEndereco() {
         when(repository.findById(1)).thenReturn(Optional.ofNullable(umEndereco(1)));
+        when(pessoaService.buscaPessoaPorId(1)).thenReturn(umaPessoa());
 
         var request = umEnderecoRequest();
         request.setLogradouro("Endereco Atualizado");
