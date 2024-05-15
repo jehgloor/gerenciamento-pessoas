@@ -1,7 +1,5 @@
 package br.com.pessoas.modules.endereco.model;
 
-import br.com.pessoas.modules.endereco.dto.EnderecoRequest;
-import br.com.pessoas.modules.endereco.enums.ESituacao;
 import org.junit.jupiter.api.Test;
 
 import static br.com.pessoas.modules.endereco.enums.ESituacao.PRIMARIA;
@@ -16,8 +14,8 @@ public class EnderecoTest {
     public void of_deveRetornarEndereco_quandoSolicitado() {
         assertThat(Endereco.of(umEnderecoRequest(), umaPessoa()))
                 .extracting("logradouro", "cep", "numero", "cidade", "uf", "situacao",
-                "pessoa.id")
-                .containsExactly(    "Rua das Flores", "86909-909", 123, "Londrina", "PR", PRIMARIA, 1);
+                        "pessoa.id")
+                .containsExactly("Rua das Flores", "86909-909", 123, "Londrina", "PR", PRIMARIA, 1);
     }
 
     @Test

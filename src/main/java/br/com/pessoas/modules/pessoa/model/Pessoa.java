@@ -15,8 +15,8 @@ import java.util.List;
 @Data
 @Entity
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "PESSOA")
 public class Pessoa {
 

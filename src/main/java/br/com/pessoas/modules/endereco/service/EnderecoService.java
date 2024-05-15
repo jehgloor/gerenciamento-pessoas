@@ -45,7 +45,7 @@ public class EnderecoService {
         return EnderecoResponse.of(repository.findAll());
     }
 
-     @Transactional
+    @Transactional
     public EnderecoResponse editarEndereco(Integer id, EnderecoRequest enderecoRequest) {
         var endereco = buscaEnderecoPorId(id);
         endereco.setAll(enderecoRequest);

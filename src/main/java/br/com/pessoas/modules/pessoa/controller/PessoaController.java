@@ -2,7 +2,6 @@ package br.com.pessoas.modules.pessoa.controller;
 
 import br.com.pessoas.modules.pessoa.dto.PessoaRequest;
 import br.com.pessoas.modules.pessoa.dto.PessoaResponse;
-import br.com.pessoas.modules.pessoa.model.Pessoa;
 import br.com.pessoas.modules.pessoa.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

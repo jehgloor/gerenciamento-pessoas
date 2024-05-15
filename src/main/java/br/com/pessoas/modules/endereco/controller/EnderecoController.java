@@ -2,7 +2,6 @@ package br.com.pessoas.modules.endereco.controller;
 
 import br.com.pessoas.modules.endereco.dto.EnderecoRequest;
 import br.com.pessoas.modules.endereco.dto.EnderecoResponse;
-import br.com.pessoas.modules.endereco.model.Endereco;
 import br.com.pessoas.modules.endereco.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

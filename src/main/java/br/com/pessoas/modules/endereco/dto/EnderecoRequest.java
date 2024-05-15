@@ -4,8 +4,8 @@ import br.com.pessoas.modules.endereco.enums.ESituacao;
 import lombok.Builder;
 import lombok.Data;
 
-@Builder
 @Data
+@Builder
 public class EnderecoRequest {
 
     private String logradouro;

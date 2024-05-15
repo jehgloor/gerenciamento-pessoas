@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 
@@ -17,7 +18,5 @@ public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
     @Query("UPDATE Endereco e SET e.situacao = 'SECUNDARIA' WHERE e.pessoa.id = :pessoaId")
     void atualizaEnderecoParaSecundario(Integer pessoaId);
 
-    List<Endereco> findByPessoaId(Integer id);
-
-    List<Endereco> findByPessoaIdAndSituacao(Integer id, ESituacao situacao);
+       List<Endereco> findByPessoaIdAndSituacao(Integer id, ESituacao situacao);
 }

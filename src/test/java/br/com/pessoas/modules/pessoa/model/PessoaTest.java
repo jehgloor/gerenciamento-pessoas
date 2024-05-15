@@ -1,13 +1,9 @@
 package br.com.pessoas.modules.pessoa.model;
 
-import br.com.pessoas.modules.endereco.model.Endereco;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static br.com.pessoas.modules.endereco.enums.ESituacao.PRIMARIA;
-import static br.com.pessoas.modules.endereco.helper.EnderecoHelper.umEndereco;
-import static br.com.pessoas.modules.endereco.helper.EnderecoHelper.umEnderecoRequest;
 import static br.com.pessoas.modules.pessoa.helper.PessoaHelper.umaPessoa;
 import static br.com.pessoas.modules.pessoa.helper.PessoaHelper.umaPessoaRequest;
 import static org.assertj.core.api.Assertions.assertThat;
